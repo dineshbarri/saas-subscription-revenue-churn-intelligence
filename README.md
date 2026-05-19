@@ -57,47 +57,36 @@ The insights from this project are directly applicable for:
 ## 📁 Repository Structure
 
 ```text
-Saas-Subscription-Revenue-Churn-Intelligence/
+saas-subscription-revenue-churn-intelligence/
 │
-├── Buisness_Questions/
-│   ├── Buisness Problem and Deliverables.pdf
-│   └── README.md
+├── assets/
+│   ├── SaaS_Revenue_Customer_Health_Overview.png
+│   ├── Growth_Funnel_Revenue_Performance.png
+│   ├── Churn_Retention_Cohort_Intelligence.png
+│   └── project_visuals/                         # Dashboard previews, charts, and supporting visuals
 │
-├── Presentation_Ravenstack/
-│   ├── RavenStack-SaaS-Subscription-Analysis _Presentationpdf.pdf
-│   └── README.md
+├── data/
+│   ├── ravenstack_accounts.csv                  # Customer profiles, signup details, industry, country, and churn status
+│   ├── ravenstack_subscriptions.csv             # Subscription lifecycle, billing, MRR, ARR, upgrades, and downgrades
+│   ├── ravenstack_feature_usage.csv             # Product engagement and feature adoption logs
+│   ├── ravenstack_support_tickets.csv           # Support interactions, escalations, and satisfaction metrics
+│   └── ravenstack_churn_events.csv              # Churn reasons, refunds, reactivations, and cancellation behaviour
 │
-├── Project_Architecture/
-│   ├── Project architecture .jpg
-│   └── README.md
+├── notebook/
+│   └── saas_revenue_churn_cohort_intelligence_analysis.ipynb
+│       # End-to-end Python analysis covering SaaS growth, revenue, churn, cohort retention, and customer-risk insights
 │
-├── Project_Report/
-│   └── README.md
-│
-├── Ravenstack.csv_data/
-│   ├── ravenstack_accounts.csv
-│   ├── ravenstack_subscriptions.csv
-│   ├── ravenstack_feature_usage.csv
-│   ├── ravenstack_supports_ticket.csv
-│   ├── ravenstack_churn_events.csv
-│   └── README.md
-│
-├── notebooks/
-│   ├── Ravensstack.ipynb
-│   └── README.md
-│
-├── sql_queries/
-│   ├── raven_stack_sql_insights.sql
-│   └── README.md
+├── sql/
+│   └── saas_revenue_churn_retention_sql_analysis.sql
+│       # Advanced PostgreSQL analysis using CTEs, window functions, funnel logic, cohort metrics, and revenue intelligence queries
 │
 ├── powerbi/
-│   ├── Saas subscription Power bi report.pbix
-│   ├── Executive overview .jpg
-│   ├── Growth ,funnel analysis.jpg
-│   ├── churn,retention and cohort analysis.jpg
-│   └── README.md
+│   └── SaaS_Revenue_Churn_Intelligence_Dashboard.pbix
+│       # Interactive 3-page Power BI dashboard for executive revenue, funnel, churn, and retention analysis
 │
-└── README.md
+├── .gitignore                                   # Excludes temporary, local, and environment-specific files
+├── LICENSE                                      # MIT License
+└── README.md                                    # Full project documentation
 ```
 
 
