@@ -34,58 +34,23 @@ This end-to-end SaaS analytics project delivers deep revenue and churn intellige
 
 ## 📌 Project Overview
 
-SaaS businesses rely on recurring revenue, retention, and customer lifecycle performance to grow sustainably.  
-This project analyses a multi-table subscription dataset to answer questions such as:
+Understanding SaaS subscription behavior, MRR trends, and churn drivers is critical for any product or growth team.  
+This project analyzes RavenStack's customer base across 5 relational tables to uncover insights into:
 
-- Which plans, industries, and countries drive the most revenue?
-- How does customer signup growth evolve over time?
-- Where is churn concentrated across customer segments?
-- How much recurring revenue is exposed to churn?
-- Which conversion, downgrade, reactivation, and cohort patterns matter for business decisions?
-- How can dashboard-ready KPIs support executive monitoring of SaaS performance?
+- 📈 **Subscription growth** and monthly signup trends  
+- 💰 **Revenue performance** by plan tier, industry, and country  
+- 🔄 **Churn & retention behavior** — who churns, when, and why  
+- 🧪 **Trial-to-paid conversion** funnel performance  
+- 📦 **Feature adoption patterns** across the product suite  
+- 👥 **Cohort analysis** — revenue and churn within 30/60/90 days  
+- 🔁 **Downgrade & reactivation** tracking  
 
-The analysis is structured to replicate real-world **revenue intelligence, retention analytics, and subscription business reporting** used by product, finance, GTM, and business operations teams.
+The insights from this project are directly applicable for:
 
----
-
-## 🎯 Business Objective
-
-The goal of this project is to transform raw SaaS subscription data into a clear analytical view of:
-
-- **Revenue performance** — MRR, ARR, plan-level revenue, market contribution
-- **Customer growth** — signups, trial-to-paid conversion, funnel performance
-- **Churn risk** — churn patterns, churn reasons, revenue exposure
-- **Retention analytics** — monthly cohorts, active subscriber trends, reactivation signals
-- **Operational intelligence** — support experience, feature usage, downgrade/upgrades
-- **Executive reporting** — interactive Power BI dashboards for leadership decisions
-
----
-
-## 📊 Dataset Overview
-
-This project uses a **synthetic multi-table SaaS dataset** designed to reflect a realistic subscription business environment.  
-It contains **customer profiles, subscription lifecycles, feature usage activity, support interactions, and churn events**, enabling both commercial and behavioural analysis.
-
-### 📁 Data Tables
-
-| Dataset | Rows | Purpose |
-|---|---:|---|
-| `ravenstack_accounts.csv` | **500** | Customer accounts, industry, country, signup channel, seats, plan tier, churn flag |
-| `ravenstack_subscriptions.csv` | **5,000** | Subscription lifecycle, MRR, ARR, upgrade/downgrade flags, trial status, auto-renewal |
-| `ravenstack_feature_usage.csv` | **25,000** | Daily product usage, feature engagement, duration, error counts, beta-feature usage |
-| `ravenstack_supports_ticket.csv` | **2,000** | Support tickets, resolution time, response speed, CSAT, escalation indicators |
-| `ravenstack_churn_events.csv` | **600** | Churn dates, churn reasons, refund behaviour, reactivation indicators |
-
-### 🧠 Why this dataset is valuable
-
-The dataset supports analysis across the **full SaaS customer lifecycle**:
-
-- Acquisition → Signup and referral source
-- Conversion → Trial to paid
-- Monetisation → MRR / ARR / plan revenue
-- Engagement → Product feature usage
-- Experience → Support interactions and satisfaction
-- Retention → Churn, reactivation, and cohort trends
+- SaaS product and growth teams  
+- Customer success and retention managers  
+- Revenue operations and finance teams  
+- Data analysts building SaaS dashboards  
 
 ---
 
@@ -135,86 +100,124 @@ Saas-Subscription-Revenue-Churn-Intelligence/
 └── README.md
 ```
 
----
-
-## 🔁 End-to-End Analytics Workflow
-
-<div align="center">
-
-```text
-Business Problem Definition
-          ↓
-Multi-Table Dataset Understanding
-          ↓
-Python Data Cleaning & Exploratory Analysis
-          ↓
-Subscription KPI Engineering
-          ↓
-PostgreSQL Business Analysis & Cohort Queries
-          ↓
-Power BI Executive Dashboards
-          ↓
-Revenue, Churn & Retention Recommendations
-```
-
-</div>
 
 ---
 
+## 🗄️ About the Dataset
 
+The dataset is a **synthetic multi-table SaaS dataset** sourced from [Kaggle by River @ Rivalytics](https://www.kaggle.com/datasets/rivalytics/saas-subscription-and-churn-analytics-dataset), designed to closely mirror real-world SaaS data structures and support end-to-end analytics practice across 5 relational tables:
 
+| Table | Records | Key Fields |
+|-------|---------|------------|
+| `accounts` | 500 | industry, country, plan_tier, signup_date, churn_flag |
+| `subscriptions` | 5,000 | mrr_amount, arr_amount, billing_frequency, upgrade/downgrade flags |
+| `feature_usage` | 25,000+ | feature_name, usage_count, usage_duration_secs, error_count |
+| `churn_events` | 600 | churn_date, reason_code, refund_amount, is_reactivation |
+| `support_tickets` | ~2,500 | resolution_time_hours, satisfaction_score, escalation_flag |
 
-# 🧹 1. Python Data Preparation & Exploratory Analysis
-
-The Jupyter notebook performs the analytical foundation of the project by:
-
-- Loading and validating **5 relational SaaS datasets**
-- Converting date fields into analysis-ready formats
-- Preserving valid nulls such as active subscriptions without an `end_date`
-- Handling zero-MRR records that may represent trials, free plans, discounts, or delayed billing
-- Creating business-friendly logic for subscription status
-- Retaining missing satisfaction scores where customer feedback was not provided
-- Exploring customer, subscription, revenue, support, usage, and churn trends
-
-### ✔ Important analytical treatment
-
-Rather than deleting records with `null end_date` or `zero MRR`, the workflow preserves them because they can represent meaningful SaaS states such as:
-
-- Active ongoing subscriptions
-- Trial users
-- Free or discounted plans
-- Unbilled or delayed billing periods
-
-This makes the analysis more realistic and avoids artificially inflating churn or undercounting active users.
+**Industries covered:** EdTech · FinTech · DevTools · HealthTech · Cybersecurity  
+**Markets:** 7 countries represented  
+**Plan Tiers:** Basic (168 accounts) · Pro (178 accounts) · Enterprise (154 accounts)  
+**Overall Churn Rate:** 22% across all accounts  
+**Total MRR in Dataset:** $11.3M+ across all subscription records  
 
 ---
 
-# 🗄️ 2. SQL Business Analysis using PostgreSQL
+## 🔍 Analysis Workflow
 
-The SQL layer converts the cleaned relational data into decision-ready business insights.
+---
+
+## 🐍 1. Data Cleaning & EDA (Python)
+
+All data wrangling and exploratory analysis were performed in the Jupyter Notebook.
+
+### ✔ Key Cleaning Steps
+
+- Parsed and standardized all date columns across all 5 tables  
+- Retained null `end_date` records as valid **active subscriptions** (not dropped)  
+- Derived `subscription_status` column: `Active - Paid`, `Active - Free`, `Ended`  
+- Preserved zero-MRR records representing free plans, trials, and delayed billing  
+- Filled missing churn `feedback_text` with a structured fallback label  
+- Added `feedback_status` column for support ticket quality tracking  
+- Verified zero duplicate records across all five tables  
+
+### ✔ Business Questions Solved in Python
+
+| # | Business Question |
+|---|-------------------|
+| Q1 | Distribution of accounts across plan tiers |
+| Q2 | Monthly account signup growth trends |
+| Q3 | Trial vs. non-trial account breakdown |
+| Q4 | MRR distribution across active subscriptions |
+| Q5 | Most frequently used product features |
+| Q6 | Feature usage intensity variation across features |
+| Q7 | Session duration distribution by feature |
+
+---
+
+## 🗄️ 2. SQL Business Analysis (PostgreSQL / pgAdmin 4)
+
+Advanced SQL queries using CTEs and window functions were executed in **pgAdmin 4** to answer strategic business questions across revenue, churn, and customer lifecycle.
 
 ### 🔍 Key Business Questions Solved
 
-#### 💰 Revenue Intelligence
-- Total and average **MRR** by plan tier
-- Revenue contribution by **industry**, **country**, and **referral source**
-- High-value subscription segments and plan economics
+---
 
-#### 🔄 Funnel & Conversion
-- Trial-to-paid conversion funnel
-- Signup and acquisition patterns
-- Revenue generated during early customer lifecycle windows
+### 💰 Revenue Intelligence
 
-#### 📉 Churn & Retention
-- Churn rate by plan tier
-- Monthly signup cohorts with churn at **30 / 60 / 90 days**
-- Active account retention trends month over month
-- Churn reason distribution and reactivation behaviour
+#### MRR & ARR by Plan Tier
+- Calculates total and average MRR per plan tier  
+- Reveals which plan tier drives the most predictable recurring revenue
 
-#### 📈 Subscription Lifecycle
-- Upgrade and downgrade patterns
-- Revenue movement linked to plan changes
-- Auto-renewal and active subscription signals
+#### Industry Revenue Contribution
+- Identifies top revenue-generating industries across the customer base  
+- Ranks FinTech, EdTech, DevTools, HealthTech, and Cybersecurity by total MRR
+
+#### Top 5 Countries by Revenue + Seat Count
+- Ranks markets by total revenue alongside average team size  
+- Guides geographic expansion and pricing strategy
+
+#### Referral Source Revenue Comparison
+- Compares total and average MRR by customer acquisition channel  
+- Quantifies organic vs. paid vs. partner ROI
+
+---
+
+### 📉 Churn & Retention Intelligence
+
+#### Churn Rate by Plan Tier
+- Calculates churned account percentage per plan tier  
+- Reveals which tier retains customers least effectively
+
+#### Downgrade-to-Churn Pipeline
+- Quantifies what % of churned accounts had a preceding downgrade event  
+- Calculates total MRR lost from accounts that downgraded before churning
+
+#### Reactivation Performance
+- Counts reactivated accounts and their average MRR post win-back  
+- Measures the effectiveness of re-engagement programs
+
+---
+
+### 👥 Cohort & Lifecycle Analysis
+
+#### Trial-to-Paid Conversion Funnel
+- Computes total trial accounts, paid conversions, and conversion rate  
+- Uses CTEs to model the full acquisition funnel in SQL
+
+#### Monthly Signup Cohorts with Early Churn Windows
+- Groups accounts by signup month (cohort)  
+- Tracks churn events within 30, 60, and 90 days per cohort class
+
+#### First-3-Month Revenue by Cohort
+- Calculates average MRR per account in the first 90 days post-signup  
+- Reveals early monetization efficiency by cohort vintage
+
+#### Month-over-Month Active Account Tracking
+- Uses `generate_series` to build a continuous calendar spine  
+- Counts distinct active accounts per month based on subscription start/end dates
+
+---
 
 ### 🧾 Sample SQL Query — Trial-to-Paid Conversion Funnel
 
@@ -248,75 +251,83 @@ LEFT JOIN paid_conversions p
 
 # 📊 3. Power BI Dashboard
 
-The Power BI report transforms the analysis into a stakeholder-friendly executive view of **growth, revenue, churn, retention, and cohort behaviour**.
-
-## Dashboard Pages
-
-### 1️⃣ Executive Overview
-A high-level view of:
-- Revenue performance
-- Customer base composition
-- Subscription distribution
-- Plan and market contribution
-
-<div align="center">
-
-<img src="powerbi/Executive%20overview%20.jpg" width="860" alt="Executive Overview Power BI Dashboard">
-
-</div>
-
----
-
-### 2️⃣ Growth & Funnel Analysis
-Designed to explore:
-- Signup growth
-- Trial-to-paid movement
-- Acquisition channels
-- Revenue and conversion performance
-
-<div align="center">
-
-<img src="powerbi/Growth%20,funnel%20analysis.jpg" width="860" alt="Growth and Funnel Analysis Power BI Dashboard">
-
-</div>
-
----
-
-### 3️⃣ Churn, Retention & Cohort Analysis
-Focused on:
-- Churn patterns
-- Retention trends
-- Cohort behaviour
-- Customer lifecycle risks
-
-<div align="center">
-
-<img src="powerbi/churn,retention%20and%20cohort%20analysis.jpg" width="860" alt="Churn Retention and Cohort Analysis Power BI Dashboard">
-
-</div>
-
----
-
-## 🚀 Dashboard Access
+The cleaned and analyzed dataset was loaded into Power BI to build a three-page interactive SaaS intelligence dashboard suitable for executive and operational audiences.
 
 <div align="center">
 
   <p>
-    <a href="powerbi/Saas%20subscription%20Power%20bi%20report.pbix" target="_blank">
-      📥 Download Power BI Dashboard File
-    </a>
-  </p>
-
-  <p>
-    <a href="powerbi/Executive%20overview%20.jpg" target="_blank">
-      🖼️ View Dashboard Preview
+    <a href="https://www.novypro.com/project/" target="_blank">
+      🚀 View Live Dashboard
     </a>
   </p>
 
 </div>
 
-> **Note:** The repository currently includes the complete Power BI report file and dashboard preview images.  
-> A public Power BI / NovyPro live dashboard URL can be added here once published.
+
+---
+
+### 🏢 Page 1 — Executive Overview
+
+
+
+<div align="center">
+
+<img src="assets/Saas Revenue Overview.png" width="820" alt="Saas Revenue Overview Dashboard ">
+
+</div>
+
+&nbsp; &nbsp;
+
+#### 🔍 Key Insights & Business Takeaways
+
+- Total Accounts, Active MRR, Churn Rate, and ARR KPI cards  
+- Revenue breakdown by plan tier and industry vertical  
+- Country-level revenue distribution  
+- Referral source performance summary  
+
+
+
+---
+
+### 📈 Page 2 — Growth & Funnel Analysis
+
+
+<div align="center">
+
+<img src="assets/GFR_Analysis-preview.png" width="820" alt="Growth and Funnel Dashboard">
+
+</div>
+
+&nbsp; &nbsp;
+
+#### 🔍 Key Insights & Business Takeaways
+
+- Monthly signup trend with growth rate annotations  
+- Trial vs. paid account composition donut chart  
+- Trial-to-paid conversion funnel visualization  
+- Active account count month-over-month trend  
+
+---
+
+### 🔄 Page 3 — Churn, Retention & Cohort Analysis
+
+
+<div align="center">
+
+<img src="assets/Churn_retention_cohort_Analysis_preview.png" width="820" alt="Churn Retention Cohort Dashboard">
+
+</div>
+
+&nbsp; &nbsp;
+
+#### 🔍 Key Insights & Business Takeaways
+
+- Monthly churn trend and churn reason category breakdown
+- Downgrade-before-churn MRR loss impact visualization
+- Cohort retention heatmap (30 / 60 / 90-day windows)
+- Reactivated account MRR recovery tracking
+
+
 
 ---
 ## 📈 Key Findings & Insights
