@@ -387,25 +387,20 @@ Based on the analysis, SaaS leadership teams could:
 
 ## 🛠️ Installation & Setup
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/dineshbarri/Saas-Subscription-Revenue-Churn-Intelligence.git
-cd Saas-Subscription-Revenue-Churn-Intelligence
+git clone https://github.com/dineshbarri/saas-subscription-revenue-churn-intelligence.git
+cd saas-subscription-revenue-churn-intelligence
 ```
 
 ---
 
-### 2. Create and activate a virtual environment
+### 2. Set Up Python Environment
 
 ```bash
-python -m venv venv
-source venv/bin/activate
-```
-
-> On Windows:
-```bash
-venv\Scripts\activate
+python -m venv venv && source venv/bin/activate   # Windows: venv\Scripts\activate
+pip install pandas numpy matplotlib seaborn jupyter
 ```
 
 ---
@@ -442,50 +437,51 @@ sql_queries/raven_stack_sql_insights.sql
 
 ### 6. Open the Power BI Dashboard
 
-- Install **Power BI Desktop** if required.
-- Open:
+- Install [Power BI Desktop](https://powerbi.microsoft.com/desktop/) if not already installed  
+- Open `PowerBi/SaaS Revenue & Churn_Intelligence_Dashboard.pbix`  
+- If prompted to refresh data source, point the file path to your local `Ravenstack.csv_data/` folder  
 
-```text
-powerbi/Saas subscription Power bi report.pbix
-```
-
-- Review the dashboard pages for revenue, churn, retention, and cohort intelligence.
 
 ---
 
-## 📈 Business Impact
+### 📊 Dataset Source
 
-This project demonstrates the ability to:
-
-- Convert relational subscription data into **executive business intelligence**
-- Build recurring revenue metrics such as **MRR / ARR**
-- Analyse **customer churn, retention, reactivation, and revenue exposure**
-- Write SQL to answer commercially meaningful business questions
-- Produce **Power BI reporting** that translates raw data into decision-ready insights
-- Connect product usage, support behaviour, and churn signals in a SaaS context
+📎 [RavenStack SaaS Dataset on Kaggle](https://www.kaggle.com/datasets/rivalytics/saas-subscription-and-churn-analytics-dataset) — by River @ Rivalytics
 
 ---
 
-## 🔮 Future Enhancements
 
-- Build a public **Power BI / NovyPro live dashboard**
-- Add **BigQuery** and cloud warehouse deployment
-- Develop **revenue forecasting** for MRR and ARR trends
-- Create a **churn-risk scoring model** using behavioural and support features
-- Add **customer segmentation** for retention prioritisation
-- Build an **automated KPI refresh workflow**
-- Add documentation for **finance / GTM reporting use cases**
+
+### 📈 Business Impact
+
+This project demonstrates how raw SaaS data can be transformed into strategic intelligence:
+
+- **Revenue Intelligence** — identify MRR concentration, risk segments, and growth levers  
+- **Churn Early Warning** — behavioral and support signals that precede cancellation  
+- **Retention Frameworks** — cohort-based strategies to reduce early and late-stage churn  
+- **Product Prioritization** — feature adoption data to align roadmap with usage reality  
+- **Executive Dashboards** — shareable Power BI reports ready for leadership communication  
 
 ---
 
-## 🤝 Contributing
+### 🔮 Future Enhancements
+
+- Machine learning churn prediction model (Logistic Regression / XGBoost / LightGBM)  
+- SHAP-based model interpretability for churn feature importance  
+- NLP analysis of `feedback_text` churn responses for unstructured signal extraction  
+- Customer health score model combining usage, support, and billing signals  
+- Real-time Power BI dashboard with live database refresh  
+
+---
+
+### 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome.  
 Feel free to open a pull request or create an issue to suggest improvements.
 
 ---
 
-## 💖 Support This Project
+### 💖 Support This Project
 
 If you find this useful, consider supporting my open-source work in Data Analytics, ML & AI automation.  
 👉 [GitHub Sponsors](https://github.com/sponsors/dineshbarri) | [PayPal](https://paypal.me/dineshbarri1997)
@@ -504,7 +500,7 @@ If you find this useful, consider supporting my open-source work in Data Analyti
 
 ---
 
-# 📄 License
+## 📄 License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
