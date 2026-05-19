@@ -319,69 +319,64 @@ Focused on:
 > A public Power BI / NovyPro live dashboard URL can be added here once published.
 
 ---
+## 📈 Key Findings & Insights
 
-# 📈 4. Key Findings & Analytical Highlights
+### 🏆 Revenue
+- **Enterprise** accounts generate the highest average MRR despite smaller account volume  
+- **FinTech and DevTools** industries contribute disproportionately to total platform revenue  
+- Top 5 countries account for ~70% of all MRR — geographic concentration is a revenue risk
 
-### 💼 Subscription Revenue
-- The subscription dataset contains approximately **$11.34M in aggregate MRR** and **$136.06M in aggregate ARR** across recorded subscription rows.
-- **Enterprise** plans contribute the largest share of MRR, representing the strongest monetisation segment in the dataset.
-- Revenue concentration can be analysed by **industry**, **country**, and **referral source** to identify strategic growth markets.
+### 📉 Churn
+- **22% overall churn rate** across the 500-account customer base  
+- Top churn reasons: `features` (missing product functionality) > `support` quality > `budget` constraints  
+- Accounts that **downgrade before churning** signal an identifiable, preventable revenue loss window  
+- A meaningful segment of churned accounts was later **reactivated**, validating win-back investment
 
-### 🔄 Customer Churn
-- Around **22% of accounts** are marked as churned in the account dataset.
-- Churn rates are relatively similar across plan tiers, suggesting churn is not isolated to a single subscription segment.
-- The most frequently recorded churn reasons include **feature gaps, support concerns, budget pressure, competitor movement, and unknown reasons**.
+### 👥 Cohort & Retention
+- Early churn (within 30 days) is elevated in newer cohorts — onboarding experience is a primary risk zone  
+- Trial accounts convert at varying rates by cohort month — engagement timing materially affects conversion  
+- First-3-month MRR per cohort varies significantly, indicating inconsistent early value delivery across vintages
 
-### 📊 Cohorts & Retention
-- Cohort analysis enables the measurement of churn within **30, 60, and 90 days** after signup.
-- Month-over-month active subscription analysis highlights retention durability and customer lifecycle movement.
-- Reactivation, upgrade, and downgrade patterns provide additional signals for renewal and retention strategy.
-
-### 🤝 Product & Support Signals
-- Feature usage events and support ticket metrics offer context around customer engagement, product friction, and service quality.
-- Resolution time, first-response speed, escalations, and satisfaction scores can be linked with churn behaviour for deeper operational analysis.
-
----
-
-# 💡 5. Business Recommendations
-
-Based on the analysis, SaaS leadership teams could:
-
-- Prioritise **high-MRR customer retention** initiatives
-- Monitor **early-lifecycle cohort churn** to reduce first-90-day customer loss
-- Analyse **trial-to-paid funnel performance** by source and plan tier
-- Investigate churn reasons linked to **features, support, and pricing pressure**
-- Use industry and country revenue splits to identify **market expansion opportunities**
-- Track downgrade and reactivation signals to support **customer success and renewal strategy**
-- Build recurring executive reporting around **MRR, ARR, conversion, churn, and retention KPIs**
+### 💡 Feature Adoption
+- A small core set of features drives the majority of all product usage  
+- Beta features show elevated error counts — product quality risk before general availability  
+- Session duration varies widely across features — some drive deep engagement, others face rapid abandonment
 
 ---
 
-## 🧩 Tools & Technologies Used
+## 💼 5. Business Recommendations
+
+Based on the full analysis, RavenStack could drive measurable improvements in retention and revenue by:
+
+1. **🎯 Prioritize Enterprise retention programs** — highest MRR per account, highest revenue loss if churned  
+2. **🚨 Trigger early lifecycle intervention** — low feature usage in the first 30 days is a leading churn signal  
+3. **🔁 Build a downgrade early-warning system** — downgrade events reliably precede full churn  
+4. **💬 Address `features` as the #1 churn reason** — product gaps are the top driver of departure  
+5. **📣 Invest in structured win-back campaigns** — reactivation data proves re-engagement works  
+6. **🌍 Diversify geographic revenue concentration** — reduce dependency on top-5 markets  
+
+---
+
+## 🧩 Tools & Technologies
 
 | Category | Technology |
-|---|---|
-| **Data Analysis** | Python, Pandas, NumPy |
-| **Exploratory Visualisation** | Matplotlib, Seaborn |
-| **Database & Querying** | PostgreSQL, SQL, CTEs, Aggregations, Cohort Logic |
-| **Business Intelligence** | Microsoft Power BI |
+|----------|------------|
+| **Data Wrangling** | Python, Pandas, NumPy |
+| **Visualization** | Matplotlib, Seaborn |
 | **Notebook Environment** | Jupyter Notebook |
+| **Database** | PostgreSQL (pgAdmin 4) |
+| **SQL Techniques** | CTEs, Window Functions, Aggregations, generate_series |
+| **BI Dashboard** | Microsoft Power BI |
 | **Version Control** | GitHub |
 
 ---
 
 ## 📋 Prerequisites
 
-- **Python 3.8+**
-- **Jupyter Notebook**
-- **PostgreSQL / pgAdmin 4**
-- **Power BI Desktop**
-- Core Python libraries:
-  - `pandas`
-  - `numpy`
-  - `matplotlib`
-  - `seaborn`
-  - `sqlalchemy`
+- **Python 3.8+** with `pandas`, `numpy`, `matplotlib`, `seaborn`  
+- **PostgreSQL 13+** and pgAdmin 4  
+- **Power BI Desktop**  
+- **Jupyter Notebook**  
 
 ---
 
@@ -416,22 +411,17 @@ pip install pandas numpy matplotlib seaborn sqlalchemy jupyter
 ### 4. Run the Jupyter notebook
 
 ```bash
-jupyter notebook notebooks/Ravensstack.ipynb
+jupyter notebook notebook/saas_revenue_churn_cohort_intelligence_analysis.ipynb
 ```
-
+> 💡 Update the `file_path` variable in the Setup cell to point to your local `data/` directory before running all cells.
 ---
 
-### 5. Run SQL analysis in PostgreSQL
+### 5. Load Data into PostgreSQL (pgAdmin 4)
 
-- Create a PostgreSQL database for the project.
-- Import the CSV files from `Ravenstack.csv_data/`.
-- Open the SQL script:
-
-```text
-sql_queries/raven_stack_sql_insights.sql
-```
-
-- Execute the queries in **pgAdmin 4** or your PostgreSQL client.
+- Open **pgAdmin 4** and create a new database named `saas_analysis`  
+- Import each CSV via **Right-click on Tables → Import/Export Data** for each of the 5 tables  
+- Open `sql/saas_revenue_churn_retention_sql_analysis.sql`  
+- Select the `saas_analysis` database and run the script (F5)  
 
 ---
 
@@ -439,7 +429,7 @@ sql_queries/raven_stack_sql_insights.sql
 
 - Install [Power BI Desktop](https://powerbi.microsoft.com/desktop/) if not already installed  
 - Open `PowerBi/SaaS Revenue & Churn_Intelligence_Dashboard.pbix`  
-- If prompted to refresh data source, point the file path to your local `Ravenstack.csv_data/` folder  
+- If prompted to refresh data source, point the file path to your local `data/` folder  
 
 
 ---
